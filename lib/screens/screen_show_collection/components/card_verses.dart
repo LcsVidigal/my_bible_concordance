@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_bible_concordance/providers/verses_repository.dart';
+import 'package:my_bible_concordance/screens/screen_view_verse/screen_view_verse.dart';
 import 'package:my_bible_concordance/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 class CardVerses extends StatelessWidget {
   final verso;
@@ -8,7 +11,11 @@ class CardVerses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {},
+      onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScreenViewVerse(currentVerse: verso))
+      ),
       child: Container(
         padding: const EdgeInsets.only(left: 10, right: 15),
         margin: const EdgeInsets.only(top: 10, bottom: 5, left: 15, right: 15),
@@ -39,9 +46,13 @@ class CardVerses extends StatelessWidget {
                     PopupMenuItem(
                       padding: EdgeInsets.zero,
                       child: ListTile(
-                        title: const Text("Deletar coleção"),
+                        title: const Text("Deletar verso"),
                         textColor: Colors.red,
-                        onTap: () { },
+                        onTap: () { 
+                          Provider.of<VersesRepository>(context, listen: false).deleteVerse(verso.verseId);
+
+                          Navigator.pop(context);
+                        },
                       )
                     )
                   ],
