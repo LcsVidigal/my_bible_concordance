@@ -8,15 +8,13 @@ class VersesRepository extends ChangeNotifier{
     return DBProvider.db.getVersesFromCollection(collectionId);
   }
 
-  addVerse(VersesModel newVerse, ){
+  addVerse(VersesModel newVerse){
     DBProvider.db.insertVerse(newVerse);
-    // listaDeColecoes = DBProvider.db.getAllCollections();
     notifyListeners();
   }
 
   deleteVerse(String verseId){
     DBProvider.db.deleteFromVerses(verseId);
-
     notifyListeners();
   }
 

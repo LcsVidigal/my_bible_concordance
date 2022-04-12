@@ -20,9 +20,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  // DBNviBible dbNviBible = new DBNviBible();
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     DBNviBible.db.initDB();
