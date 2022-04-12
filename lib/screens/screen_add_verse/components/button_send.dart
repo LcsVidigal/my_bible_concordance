@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_bible_concordance/models/model_verses.dart';
 import 'package:my_bible_concordance/providers/db_provider.dart';
+import 'package:my_bible_concordance/providers/verses_repository.dart';
 import 'package:my_bible_concordance/screens/screen_add_verse/global/global_state.dart';
 import 'package:my_bible_concordance/screens/screen_home/screen_collections.dart';
+import 'package:provider/provider.dart';
 
 import '../../../utils/constants.dart';
 
@@ -62,9 +64,10 @@ class _ButtonSendState extends State<ButtonSend> {
                 1,
                 commentValue()
               );
-              DBProvider.db.insertVerse(verso);
+              
+              Provider.of<VersesRepository>(context, listen: false).addVerse(verso);
               // print(verseText());
-              return Navigator.pop(context);
+              Navigator.pop(context, 'Ok');
             }
         })
 
