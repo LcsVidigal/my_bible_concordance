@@ -31,13 +31,23 @@ class _ButtonSendState extends State<ButtonSend> {
         child: const Text("Salvar"),
         onPressed: (() {
           // verseText = store.get("verseText");
-            if(
-              selectedBook() == null 
+            if(selectedBook() == null 
                || selectedChapter() == null 
                || selectedInitialVerse() == null 
                || selectedFinalVerse() == null 
                || commentValue() == null
                || verseText() == null){
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: const Text('Complete todos os campos antes de salvar'),
+                  action: SnackBarAction(
+                    label: 'Fechar',
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    },
+                  ),
+                ),
+              );
               print("objeto nulo");
             }
             else{ 

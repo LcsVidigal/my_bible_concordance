@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_bible_concordance/models/model_verses.dart';
 import 'package:my_bible_concordance/utils/constants.dart';
 
 class CardVerses extends StatelessWidget {
@@ -8,23 +7,11 @@ class CardVerses extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // VersesModel verso = VersesModel(
-    //   "id do versiculo", 
-    //   "Amor",
-    //   "id da colecao",
-    //   "Josué", 
-    //   "21", 
-    //   "45",
-    //   "46",
-    //   "De todas as boas promessas do Senhor à nação de Israel, nenhuma delas falhou; todas se cumpriram.", 
-    //   true, 
-    //   "Deus nunca falhará em nenhuma de suas promessas, basta esperar, Deus é fiel e cumpre o que promete. Isso não depende de mim.");
-
     return GestureDetector(
       onTap: () => {},
       child: Container(
         padding: const EdgeInsets.only(left: 10, right: 15),
-        margin: const EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15),
+        margin: const EdgeInsets.only(top: 10, bottom: 5, left: 15, right: 15),
         height: 145,
         decoration: BoxDecoration(
           color: kCardCollectionsColor,
@@ -32,6 +19,7 @@ class CardVerses extends StatelessWidget {
           border: Border.all(color: kBorderCardCollectionsColor, width: 1.5),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(children: [
               Text("${verso.book} ${verso.chapter}:${verso.initialVerse}",
@@ -39,7 +27,7 @@ class CardVerses extends StatelessWidget {
                   
               Expanded(child: Container()),
 
-              if(verso.isfavorite)
+              if(verso.isFavorite == 0)
                 const Icon(Icons.favorite, color: Colors.red),
 
               SizedBox(
@@ -80,6 +68,7 @@ class CardVerses extends StatelessWidget {
             Container(height: 8,),
 
             RichText(
+              
               text: TextSpan(
                 text: "Comentário: ",
                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),

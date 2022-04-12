@@ -212,7 +212,7 @@ class _AddVerseBodyState extends State<AddVerseBody> {
                           initialVerse: selectedInitialVerse, 
                           finalVerse: selectedFinalVerse, 
                           verseText: verseText!
-                        );                  
+                        );
                     }
                     else if(snapshot.hasError){
                       print("erro ao pegar os dados");
@@ -222,9 +222,7 @@ class _AddVerseBodyState extends State<AddVerseBody> {
                   }
                 ),
                 const AddComment(),
-                const SizedBox(height: 20),
-                
-              
+                const SizedBox(height: 100)
           ],
         ),
       ),

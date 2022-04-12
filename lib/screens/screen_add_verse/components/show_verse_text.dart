@@ -10,6 +10,7 @@ class ShowVerseText extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 5, bottom: 10),
       constraints: const BoxConstraints(
         maxHeight: double.infinity,
         minWidth: double.infinity

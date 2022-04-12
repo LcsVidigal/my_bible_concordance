@@ -10,7 +10,7 @@ class VersesModel{
   String initialVerse;
   String finalVerse;
   String text;
-  int isfavorite;
+  int isFavorite;
   String comment;
 
   VersesModel(
@@ -22,7 +22,7 @@ class VersesModel{
     this.initialVerse,
     this.finalVerse,
     this.text,
-    this.isfavorite,
+    this.isFavorite,
     this.comment
   );
 
@@ -43,12 +43,25 @@ class VersesModel{
     "initialVerse": initialVerse,
     "finalVerse": finalVerse,
     "text": text,
+    "isFavorite": isFavorite,
     "comment": comment
     
   };
 
-
-
+  factory VersesModel.fromJson(Map<String, dynamic> json) {
+    return VersesModel(
+        json['verseId'],
+        json['collection'],
+        json['idCollection'],
+        json['book'],
+        json['chapter'],
+        json['initialVerse'],
+        json['finalVerse'],
+        json['text'],
+        json['isFavorite'],
+        json['comment']
+    );
+  }
 
 }
 

@@ -96,14 +96,21 @@ class DBProvider {
     return res;
   }
 
-   Future<List<CollectionsModel>> getFromCollection(String idCollection) async {
+   Future<List<VersesModel>> getVersesFromCollection(String idCollection) async {
     final db = await database;
     final res = await db.rawQuery("SELECT * FROM Verses WHERE idCollection = ?", [idCollection]);
 
-    List<CollectionsModel> list =
-    res.isNotEmpty ? res.map((c) => CollectionsModel.fromJson(c)).toList() : [];
+    List<VersesModel> list =
+    res.isNotEmpty ? res.map((c) => VersesModel.fromJson(c)).toList() : [];
     
     return list;
+  }
+
+  deleteFromVerses(String verseId) async {
+    final db = await database;
+    final res = await db.rawDelete('DELETE FROM Verses WHERE verseId = ?', [verseId]);
+
+    return res;
   }
 
 }

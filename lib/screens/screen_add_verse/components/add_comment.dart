@@ -9,25 +9,16 @@ class AddComment extends StatefulWidget{
   State<AddComment> createState() => _AddCommentState();
 }
 
-
 class _AddCommentState extends State<AddComment> {
-  // late TextEditingController _controller;
   final commentControler = TextEditingController();
-
   commentValue() => commentControler.text;
-  
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _controller = TextEditingController();
-  // }
 
   @override
   Widget build(BuildContext context) {
     store.set("commentValue", commentValue);
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text("Comentário:", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
         Container(

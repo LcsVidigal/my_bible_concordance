@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_bible_concordance/providers/db_nvi_bible.dart';
 import 'package:my_bible_concordance/providers/db_provider.dart';
+import 'package:my_bible_concordance/providers/verses_repository.dart';
 import 'package:my_bible_concordance/screens/screen_home/components/search_field.dart';
 import 'package:my_bible_concordance/screens/screen_show_collection/components/button_add_verse.dart';
 import 'package:my_bible_concordance/screens/screen_show_collection/components/card_verses.dart';
 import 'package:my_bible_concordance/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 class ScreenShowCollection extends StatelessWidget{
   final currentCollection;
@@ -51,23 +53,7 @@ class ScreenShowCollectionBody extends StatelessWidget{
         children: [
           SearchField(),
           ButtonAddVerse(currentCollection: currentColletion,),
-          FutureBuilder(
-            future: DBProvider.db.getFromCollection(currentColletion.collectionId),
-            builder: (context, snapshot){
-              if(snapshot.hasData){
-                // print(snapshot.data);
-                // print("Entrou no retorno do banco");
-                return ListVerses(listVerses: snapshot.data!);
-                // return Text("load collections");
-                
-              }
-              else if(snapshot.hasError){
-                print("erro ao pegar os dados");
-                return Text('${snapshot.error}');
-              }
-              return const Center(child: CircularProgressIndicator());
-            }
-          ),
+          LoadVerses(collectionId: currentColletion.collectionId),
         ],
       ),
     );
@@ -76,13 +62,41 @@ class ScreenShowCollectionBody extends StatelessWidget{
 }
 
 
+
+class LoadVerses extends StatelessWidget{
+  final collectionId;
+  const LoadVerses({Key? key, required this.collectionId}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<VersesRepository>(
+      builder: (context, value, child){
+        return FutureBuilder(
+          future: value.listVersesFromCollection(collectionId),
+          builder: (context, snapshot){
+            if(snapshot.hasData){
+              return ListVerses(listVerses: snapshot.data!);
+            }
+            else if(snapshot.hasError){
+              return Text('${snapshot.error}');
+            }
+            return const Center(child: CircularProgressIndicator());
+          }
+        );       
+      }
+    );
+  }
+  
+}
+
+
+
 class ListVerses extends StatelessWidget{
   final listVerses;
   const ListVerses({Key? key, required this.listVerses}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Expanded(
       child: ListView.builder(
       cacheExtent: double.infinity,
