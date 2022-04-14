@@ -39,7 +39,6 @@ class ScreenCollectionsBody extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // Size screenSize = MediaQuery.of(context).size;
-    
     return Center(
       child: Column(
         children: [

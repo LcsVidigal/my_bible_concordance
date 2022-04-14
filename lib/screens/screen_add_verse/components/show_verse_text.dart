@@ -37,7 +37,6 @@ class ShowVerseText extends StatelessWidget{
           ),
           const SizedBox(height: 5),
           Text(verseText, textAlign: TextAlign.justify),
-          // Text(titleTextValue())
         ],
       )
     

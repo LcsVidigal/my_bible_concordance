@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_bible_concordance/models/model_verses.dart';
 import 'package:my_bible_concordance/utils/constants.dart';
 
 class ScreenViewVerse extends StatelessWidget{
@@ -15,7 +14,7 @@ class ScreenViewVerse extends StatelessWidget{
         RichText(
           text: TextSpan(
             text: '${currentVerse.book} ${currentVerse.chapter}:${currentVerse.initialVerse}',
-            style: TextStyle(color: Colors.black, fontFamily: 'Inter', fontSize: 20, fontWeight: FontWeight.w800),
+            style: const TextStyle(color: Colors.black, fontFamily: 'Inter', fontSize: 20, fontWeight: FontWeight.w800),
             children: [
               if(currentVerse.initialVerse != currentVerse.finalVerse)
                 TextSpan(
@@ -53,31 +52,52 @@ class BodyViewVerse extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return 
+    Padding(
       padding: const EdgeInsets.all(15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 5, bottom: 10),
-            constraints: const BoxConstraints(
-              maxHeight: double.infinity,
-              minWidth: double.infinity
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 5, bottom: 10),
+              constraints: const BoxConstraints(
+                maxHeight: double.infinity,
+                minWidth: double.infinity
+              ),
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: kCardCollectionsColor,
+                borderRadius: const BorderRadius.all(Radius.circular(6)),
+                border: Border.all(color: kBorderCardCollectionsColor, width: 1.5),
+              ),
+              child: Column(
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      text: '${currentVerse.book} ${currentVerse.chapter}:${currentVerse.initialVerse}',
+                      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+                      children: [
+                        if(currentVerse.initialVerse != currentVerse.finalVerse)
+                          TextSpan(
+                            text: '-${currentVerse.finalVerse}',
+                          ),
+                      ]
+                    )
+                  ),
+                  const SizedBox(height: 5),
+                  Text(currentVerse.text, textAlign: TextAlign.justify),
+                ],
+              )
             ),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: kCardCollectionsColor,
-              borderRadius: const BorderRadius.all(Radius.circular(6)),
-              border: Border.all(color: kBorderCardCollectionsColor, width: 1.5),
-            ),
-            child: Text(currentVerse.text, textAlign: TextAlign.justify)
-          ),
-          const SizedBox(height: 10,),
-          const Text("Comentário:", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 10,),
-
-          Text(currentVerse.text)
-        ],
+            const SizedBox(height: 10,),
+            const Text("Comentário:", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10,),
+            
+            Text(currentVerse.comment, textAlign: TextAlign.justify),
+            const SizedBox(height: 15,),
+          ],
+        ),
       ),
     );
   }

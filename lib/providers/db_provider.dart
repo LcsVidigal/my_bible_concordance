@@ -55,6 +55,7 @@ class DBProvider {
     // await deleteAllCollections();
     final db = await database;
     final res = await db.insert('Collections', newCollection.toJson());
+    
 
     return res;
   }
@@ -80,6 +81,8 @@ class DBProvider {
   deleteFromCollections(String id) async {
     final db = await database;
     final res = await db.rawDelete('DELETE FROM Collections WHERE collectionId = ?', [id]);
+    await db.rawDelete('DELETE FROM Verses WHERE idCollection = ?', [id]);
+
 
     return res;
   }
@@ -89,11 +92,11 @@ class DBProvider {
   //###########
 
   insertVerse(VersesModel newVerse) async {
-    // await deleteAllCollections();
     final db = await database;
+    final count = await db.rawUpdate('UPDATE Collections SET numberOfVerses = numberOfVerses + 1 WHERE collectionId = ?',[newVerse.idCollection]);
     final res = await db.insert('Verses', newVerse.toJson());
 
-    return res;
+    return count;
   }
 
    Future<List<VersesModel>> getVersesFromCollection(String idCollection) async {
@@ -106,11 +109,13 @@ class DBProvider {
     return list;
   }
 
-  deleteFromVerses(String verseId) async {
+  deleteFromVerses(VersesModel verse) async {
     final db = await database;
-    final res = await db.rawDelete('DELETE FROM Verses WHERE verseId = ?', [verseId]);
+    final count = await db.rawUpdate('UPDATE Collections SET numberOfVerses = numberOfVerses - 1 WHERE collectionId = ?',[verse.idCollection]);
+    final res = await db.rawDelete('DELETE FROM Verses WHERE verseId = ?', [verse.verseId]);
 
-    return res;
+    return count;
   }
+  
 
 }

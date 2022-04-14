@@ -28,6 +28,7 @@ class _CreateCollectionAlertState extends State<CreateCollectionAlert> {
       contentPadding: const EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 20),
       buttonPadding: const EdgeInsets.all(0),
       content: TextField(
+        textCapitalization: TextCapitalization.sentences,
         controller: _controller,
         maxLength: 30,
         decoration: const InputDecoration(
@@ -44,7 +45,7 @@ class _CreateCollectionAlertState extends State<CreateCollectionAlert> {
         TextButton(
           onPressed: (){
             CollectionsModel newCollection = CollectionsModel.create(_controller.text);
-            Provider.of<CollectionsRepository>(context, listen: false).addCollection(newCollection);
+            Provider.of<DbRepository>(context, listen: false).addCollection(newCollection);
             
             return Navigator.pop(context, 'Ok');
           },

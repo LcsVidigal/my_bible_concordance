@@ -10,7 +10,7 @@ class LoadCollections extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CollectionsRepository>(
+    return Consumer<DbRepository>(
       builder: (context, value, child){
         return Expanded(
           child: FutureBuilder(

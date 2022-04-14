@@ -27,6 +27,7 @@ class _AddCommentState extends State<AddComment> {
             minWidth: double.infinity
           ),
           child: TextField(
+            textCapitalization: TextCapitalization.sentences,
             controller: commentControler,
             maxLength: 1000,
             maxLines: null,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_bible_concordance/providers/verses_repository.dart';
+import 'package:my_bible_concordance/providers/collections_repository.dart';
 import 'package:my_bible_concordance/screens/screen_view_verse/screen_view_verse.dart';
 import 'package:my_bible_concordance/utils/constants.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,7 @@ class CardVerses extends StatelessWidget {
       ),
       child: Container(
         padding: const EdgeInsets.only(left: 10, right: 15),
-        margin: const EdgeInsets.only(top: 10, bottom: 5, left: 15, right: 15),
+        margin: const EdgeInsets.only(bottom: 20, left: 15, right: 15),
         height: 145,
         decoration: BoxDecoration(
           color: kCardCollectionsColor,
@@ -29,16 +29,25 @@ class CardVerses extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(children: [
-              Text("${verso.book} ${verso.chapter}:${verso.initialVerse}",
-                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
-                  
+              RichText(
+                text: TextSpan(
+                  text: '${verso.book} ${verso.chapter}:${verso.initialVerse}',
+                  style: const TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
+                  children: [
+                    if(verso.initialVerse != verso.finalVerse)
+                      TextSpan(
+                        text: '-${verso.finalVerse}',
+                      ),
+                  ]
+                )
+              ),
               Expanded(child: Container()),
 
               if(verso.isFavorite == 0)
                 const Icon(Icons.favorite, color: Colors.red),
 
               SizedBox(
-                width: 16,
+                width: 25,
                 child: PopupMenuButton(
                   padding: EdgeInsets.zero,
                   icon: const Icon(Icons.more_vert),
@@ -48,9 +57,8 @@ class CardVerses extends StatelessWidget {
                       child: ListTile(
                         title: const Text("Deletar verso"),
                         textColor: Colors.red,
-                        onTap: () { 
-                          Provider.of<VersesRepository>(context, listen: false).deleteVerse(verso.verseId);
-
+                        onTap: (){ 
+                          Provider.of<DbRepository>(context, listen: false).deleteVerse(verso);
                           Navigator.pop(context);
                         },
                       )

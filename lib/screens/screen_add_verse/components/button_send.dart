@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_bible_concordance/models/model_verses.dart';
-import 'package:my_bible_concordance/providers/db_provider.dart';
-import 'package:my_bible_concordance/providers/verses_repository.dart';
+import 'package:my_bible_concordance/providers/collections_repository.dart';
 import 'package:my_bible_concordance/screens/screen_add_verse/global/global_state.dart';
-import 'package:my_bible_concordance/screens/screen_home/screen_collections.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/constants.dart';
@@ -31,7 +29,7 @@ class _ButtonSendState extends State<ButtonSend> {
     return FloatingActionButton(
         backgroundColor: kPrimaryColor,
         child: const Text("Salvar"),
-        onPressed: (() {
+        onPressed: ((){
           // verseText = store.get("verseText");
             if(selectedBook() == null 
                || selectedChapter() == null 
@@ -65,8 +63,8 @@ class _ButtonSendState extends State<ButtonSend> {
                 commentValue()
               );
               
-              Provider.of<VersesRepository>(context, listen: false).addVerse(verso);
-              // print(verseText());
+              Provider.of<DbRepository>(context, listen: false).addVerse(verso);
+
               Navigator.pop(context, 'Ok');
             }
         })

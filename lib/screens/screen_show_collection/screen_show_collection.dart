@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_bible_concordance/providers/collections_repository.dart';
 import 'package:my_bible_concordance/providers/db_nvi_bible.dart';
 import 'package:my_bible_concordance/providers/db_provider.dart';
-import 'package:my_bible_concordance/providers/verses_repository.dart';
 import 'package:my_bible_concordance/screens/screen_home/components/search_field.dart';
 import 'package:my_bible_concordance/screens/screen_show_collection/components/button_add_verse.dart';
 import 'package:my_bible_concordance/screens/screen_show_collection/components/card_verses.dart';
@@ -51,8 +51,9 @@ class ScreenShowCollectionBody extends StatelessWidget{
     return Center(
       child: Column(
         children: [
-          SearchField(),
-          ButtonAddVerse(currentCollection: currentColletion,),
+          // SearchField(),
+          ButtonAddVerse(currentCollection: currentColletion),
+          SizedBox(height: 10),
           LoadVerses(collectionId: currentColletion.collectionId),
         ],
       ),
@@ -69,7 +70,7 @@ class LoadVerses extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<VersesRepository>(
+    return Consumer<DbRepository>(
       builder: (context, value, child){
         return FutureBuilder(
           future: value.listVersesFromCollection(collectionId),

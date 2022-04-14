@@ -48,7 +48,7 @@ class CardCollections extends StatelessWidget{
                     onTap: (){
                       Navigator.pop(context);
     
-                      Provider.of<CollectionsRepository>(context, listen: false)
+                      Provider.of<DbRepository>(context, listen: false)
                         .deleteCollection(itemColecao.collectionId);
                     },
                   )
