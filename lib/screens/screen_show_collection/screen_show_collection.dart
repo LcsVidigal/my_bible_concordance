@@ -86,6 +86,9 @@ class ListVerses extends StatelessWidget{
           SizedBox(height: 12),
           Text("Total de Versos: ${listVerses.length}", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),),
           SizedBox(height: 12),
+          if(listVerses.length  == 0)
+            Text("Você ainda não possui itens nessa coleção."),
+
           Expanded(
             child: ListView.builder(
             cacheExtent: double.infinity,

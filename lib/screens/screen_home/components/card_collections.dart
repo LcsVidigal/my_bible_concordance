@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_bible_concordance/providers/collections_repository.dart';
+import 'package:my_bible_concordance/screens/screen_home/components/update_collection_name.dart';
 import 'package:my_bible_concordance/screens/screen_show_collection/screen_show_collection.dart';
 import 'package:my_bible_concordance/utils/constants.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +53,21 @@ class CardCollections extends StatelessWidget{
                         .deleteCollection(itemColecao.collectionId);
                     },
                   )
-                )
+                ),
+                PopupMenuItem(
+                  child: ListTile(
+                    title: const Text("Renomear"),
+                    textColor: Colors.black,
+                    onTap: (){
+                      Navigator.pop(context);
+
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => UpdateCollectionName(collectionId: itemColecao.collectionId)
+                      );
+                    },
+                  )
+                ),
               ],
             )
           )

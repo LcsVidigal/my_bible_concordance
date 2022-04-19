@@ -83,7 +83,13 @@ class DBProvider {
     final res = await db.rawDelete('DELETE FROM Collections WHERE collectionId = ?', [id]);
     await db.rawDelete('DELETE FROM Verses WHERE idCollection = ?', [id]);
 
+    return res;
+  }
 
+  updateCollectionName(String id, String newName) async {
+    final db = await database;
+    final res = await db.rawUpdate('UPDATE Collections SET collectionName = ? WHERE collectionId = ?',[newName, id]);
+    
     return res;
   }
 

@@ -19,6 +19,11 @@ class DbRepository extends ChangeNotifier{
     notifyListeners();
   }
 
+  updateCollectionName(String id, String newName){
+    DBProvider.db.updateCollectionName(id, newName);
+    notifyListeners();
+  }
+
 
   Future<List<VersesModel>> listVersesFromCollection(collectionId){
     return DBProvider.db.getVersesFromCollection(collectionId);
