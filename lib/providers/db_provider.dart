@@ -70,7 +70,7 @@ class DBProvider {
 
   Future<List<CollectionsModel>> getAllCollections() async {
     final db = await database;
-    final res = await db.rawQuery("SELECT * FROM Collections");
+    final res = await db.rawQuery("SELECT * FROM Collections ORDER BY collectionName ASC");
 
     List<CollectionsModel> list =
     res.isNotEmpty ? res.map((c) => CollectionsModel.fromJson(c)).toList() : [];
