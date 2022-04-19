@@ -48,35 +48,13 @@ class ScreenShowCollectionBody extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          // SearchField(),
-          ButtonAddVerse(currentCollection: currentColletion),
-          SizedBox(height: 10),
-          LoadVerses(collectionId: currentColletion.collectionId),
-        ],
-      ),
-    );
-  }
-  
-}
-
-
-
-class LoadVerses extends StatelessWidget{
-  final collectionId;
-  const LoadVerses({Key? key, required this.collectionId}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     return Consumer<DbRepository>(
       builder: (context, value, child){
         return FutureBuilder(
-          future: value.listVersesFromCollection(collectionId),
+          future: value.listVersesFromCollection(currentColletion.collectionId),
           builder: (context, snapshot){
             if(snapshot.hasData){
-              return ListVerses(listVerses: snapshot.data!);
+              return ListVerses(listVerses: snapshot.data!, collection: currentColletion,);
             }
             else if(snapshot.hasError){
               return Text('${snapshot.error}');
@@ -92,22 +70,36 @@ class LoadVerses extends StatelessWidget{
 
 
 
+
 class ListVerses extends StatelessWidget{
   final listVerses;
-  const ListVerses({Key? key, required this.listVerses}) : super(key: key);
+  final collection;
+  const ListVerses({Key? key, required this.listVerses, required this.collection}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-      cacheExtent: double.infinity,
-      itemCount: listVerses.length, 
-      itemBuilder: (BuildContext context, int index) { 
-        final item = listVerses[index];
-        return CardVerses(verso: item);
-        },
+    return Center(
+      child: Column(
+        children: [
+          // SearchField(),
+          ButtonAddVerse(currentCollection: collection),
+          SizedBox(height: 12),
+          Text("Total de Versos: ${listVerses.length}", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),),
+          SizedBox(height: 12),
+          Expanded(
+            child: ListView.builder(
+            cacheExtent: double.infinity,
+            itemCount: listVerses.length, 
+            itemBuilder: (BuildContext context, int index) { 
+              final item = listVerses[index];
+              return CardVerses(verso: item);
+              },
+            ),
+          )
+        ],
       ),
     );
+    
   }
   
 }

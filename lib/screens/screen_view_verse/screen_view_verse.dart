@@ -10,19 +10,7 @@ class ScreenViewVerse extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: 
-        RichText(
-          text: TextSpan(
-            text: '${currentVerse.book} ${currentVerse.chapter}:${currentVerse.initialVerse}',
-            style: const TextStyle(color: Colors.black, fontFamily: 'Inter', fontSize: 20, fontWeight: FontWeight.w800),
-            children: [
-              if(currentVerse.initialVerse != currentVerse.finalVerse)
-                TextSpan(
-                  text: '-${currentVerse.finalVerse}',
-                ),
-            ]
-          )
-        ),
+        title: Text(currentVerse.collection, style: const TextStyle(color: Colors.black, fontFamily: 'Inter', fontSize: 26, fontWeight: FontWeight.w800)),
         backgroundColor: kBackgroundColor,
         systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: kBackgroundColor, statusBarIconBrightness: Brightness.dark),
         elevation: 0,
