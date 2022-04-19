@@ -23,7 +23,11 @@ class ScreenCollections extends StatelessWidget{
         leading: Container(
           margin: const EdgeInsets.only(left: 20),
           alignment: Alignment.centerLeft,
-          child: const Text("Sair", style: TextStyle(color: Colors.green, fontSize: 17, fontWeight: FontWeight.w500))),
+          child: TextButton(
+            onPressed: () { SystemNavigator.pop(); },
+            child: Text("Sair", style: TextStyle(color: Colors.green, fontSize: 17, fontWeight: FontWeight.w500)),
+          )
+        ),
         
         actions: <Widget> [Container(child: const Icon(Icons.settings, color: Color.fromARGB(221, 145, 143, 143),), margin: EdgeInsets.only(right: 10),)],
       ),
