@@ -45,21 +45,9 @@ class ScreenCollectionsBody extends StatelessWidget{
     // Size screenSize = MediaQuery.of(context).size;
     return Center(
       child: Column(
-        children: [
+        children: const [
           SearchField(),
-          CardFavoritos(),
-          Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: Row(
-              children: const [
-                Expanded(child: Divider(indent: 10, endIndent: 10, color: Color.fromARGB(155, 109, 109, 109), thickness: 2)),
-                Text("Minhas coleções", style: TextStyle(fontWeight: FontWeight.w400),),
-                Expanded(child: Divider(indent: 10, endIndent: 10, color: Color.fromARGB(155, 109, 109, 109), thickness: 2)),
-              ],
-            ),
-          ),
           LoadCollections()
-          
         ],
       ),
     );

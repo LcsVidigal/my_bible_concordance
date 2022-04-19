@@ -3,9 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_bible_concordance/providers/collections_repository.dart';
-import 'package:my_bible_concordance/providers/db_nvi_bible.dart';
-import 'package:my_bible_concordance/providers/db_provider.dart';
-import 'package:my_bible_concordance/screens/screen_home/components/search_field.dart';
 import 'package:my_bible_concordance/screens/screen_show_collection/components/button_add_verse.dart';
 import 'package:my_bible_concordance/screens/screen_show_collection/components/card_verses.dart';
 import 'package:my_bible_concordance/utils/constants.dart';

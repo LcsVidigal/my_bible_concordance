@@ -30,6 +30,17 @@ class DBProvider {
         'collectionName TEXT,'
         'numberOfVerses INT'
         ')',
+      'CREATE TABLE Favoritos('
+        'verseId TEXT,'
+        'collection TEXT,'
+        'idCollection TEXT,'        
+        'book TEXT,'
+        'chapter TEXT,'
+        'initialVerse TEXT,'
+        'finalVerse TEXT,'
+        'text TEXT,'
+        'comment TEXT'
+        ')',
       'CREATE TABLE Verses('
         'verseId TEXT,'
         'collection TEXT,'
@@ -48,6 +59,14 @@ class DBProvider {
     for (String query in queryes) {
       await db.execute(query);
     }
+
+    var favoritos = {
+      'collectionId': "Favoritos",
+      'collectionName' : "Versos Favoritos",
+      'numberOfVerses' : 0
+    };
+
+    await db.insert('Collections', favoritos);
   }
 
 
@@ -61,12 +80,12 @@ class DBProvider {
   }
 
 
-  Future<int> deleteAllCollections() async {
-    final db = await database;
-    final res = await db.rawDelete('DELETE FROM Collections');
+  // Future<int> deleteAllCollections() async {
+  //   final db = await database;
+  //   final res = await db.rawDelete('DELETE FROM Collections');
 
-    return res;
-  }
+  //   return res;
+  // }
 
   Future<List<CollectionsModel>> getAllCollections() async {
     final db = await database;
