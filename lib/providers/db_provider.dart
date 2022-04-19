@@ -122,6 +122,13 @@ class DBProvider {
 
     return count;
   }
+
+  updateVerse(VersesModel verse) async {
+    final db = await database;
+    final res = await db.rawUpdate('UPDATE Verses SET book = ?, chapter = ?, initialVerse = ?, finalVerse = ?, text = ?, comment = ? WHERE verseId = ?',[verse.book, verse.chapter, verse.initialVerse, verse.finalVerse, verse.text, verse.comment, verse.verseId]);
+
+    return res;
+  }
   
 
 }

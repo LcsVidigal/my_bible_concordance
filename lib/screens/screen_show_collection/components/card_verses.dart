@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:my_bible_concordance/providers/collections_repository.dart';
+import 'package:my_bible_concordance/screens/screen_update_verse/screen_update_verse.dart';
 import 'package:my_bible_concordance/screens/screen_view_verse/screen_view_verse.dart';
 import 'package:my_bible_concordance/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 class CardVerses extends StatelessWidget {
+  final currentCollection;
   final verso;
-  const CardVerses({Key? key, required this.verso}) : super(key: key);
+  const CardVerses({Key? key, required this.verso, required this.currentCollection}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +62,21 @@ class CardVerses extends StatelessWidget {
                         onTap: (){ 
                           Provider.of<DbRepository>(context, listen: false).deleteVerse(verso);
                           Navigator.pop(context);
+                        },
+                      )
+                    ),
+                    PopupMenuItem(
+                      padding: EdgeInsets.zero,
+                      child: ListTile(
+                        title: const Text("Editar"),
+                        textColor: Colors.black,
+                        onTap: (){ 
+                          Navigator.pop(context);
+                          Navigator.push(context,
+                            MaterialPageRoute(
+                                builder: (context) => ScreenUpdateVerse(currentVerse: verso, currentCollection: currentCollection,)));
+                          
+                          // Navigator.pop(context);
                         },
                       )
                     )

@@ -95,7 +95,7 @@ class ListVerses extends StatelessWidget{
             itemCount: listVerses.length, 
             itemBuilder: (BuildContext context, int index) { 
               final item = listVerses[index];
-              return CardVerses(verso: item);
+              return CardVerses(verso: item, currentCollection: collection,);
               },
             ),
           )

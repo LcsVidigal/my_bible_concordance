@@ -39,5 +39,10 @@ class DbRepository extends ChangeNotifier{
     notifyListeners();
   }
 
+  updateVerse(VersesModel updatedVerse) async {
+    await DBProvider.db.updateVerse(updatedVerse);
+    notifyListeners();
+  }
+
 
 }
