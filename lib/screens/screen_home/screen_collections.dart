@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_bible_concordance/screens/screen_home/components/card_favoritos.dart';
 import 'package:my_bible_concordance/screens/screen_home/components/list_all_collections.dart';
 import 'package:my_bible_concordance/screens/screen_home/components/search_field.dart';
 import 'package:my_bible_concordance/utils/constants.dart';
@@ -46,7 +45,6 @@ class ScreenCollectionsBody extends StatelessWidget{
     return Center(
       child: Column(
         children: const [
-          SearchField(),
           LoadCollections()
         ],
       ),

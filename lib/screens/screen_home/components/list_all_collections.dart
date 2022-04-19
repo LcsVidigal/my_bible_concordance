@@ -3,6 +3,7 @@ import 'package:my_bible_concordance/providers/collections_repository.dart';
 import 'package:my_bible_concordance/screens/screen_home/components/card_collections.dart';
 import 'package:my_bible_concordance/screens/screen_home/components/card_favoritos.dart';
 import 'package:my_bible_concordance/screens/screen_home/components/create_collection_alert.dart';
+import 'package:my_bible_concordance/screens/screen_home/components/search_field.dart';
 import 'package:my_bible_concordance/utils/constants.dart';
 import 'package:provider/provider.dart';
 
@@ -33,16 +34,50 @@ class LoadCollections extends StatelessWidget{
   }
 }
 
-class ListAllCollections extends StatelessWidget{
+class ListAllCollections extends StatefulWidget{
   final listaDeColecoes;
   const ListAllCollections({Key? key, required this.listaDeColecoes, }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {    
+  State<ListAllCollections> createState() => _ListAllCollectionsState();
+}
+
+class _ListAllCollectionsState extends State<ListAllCollections> {
+  final searchController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) { 
+    Size screenSize = MediaQuery.of(context).size;   
     return Column(
       children: [
+        Container(
+          margin: const EdgeInsets.only(top: 30),
+          width: screenSize.width - 50,
+          child: TextField(
+            controller: searchController,
+            cursorColor: Colors.grey,
+            maxLength: 20,
+            onChanged: (value){setState(() {
+              
+            });},
+            decoration: const InputDecoration(
+              counterText: "",
+              filled: true,
+              fillColor: kCardCollectionsColor,
+              contentPadding: EdgeInsets.all(20),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(40)),
+                borderSide: BorderSide(color: kBorderCardCollectionsColor, width: 1.2, style: BorderStyle.solid)),
+              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(40)),
+                borderSide: BorderSide(color: kBorderCardCollectionsColor, width: 1.2, style: BorderStyle.solid)),
+              hintText: "Pesquisar",
+            ),
+          ),
+        ),
 
-        CardFavoritos(colecaoFavoritos: listaDeColecoes.firstWhere((element) => element.collectionId == "Favoritos")),
+        // SearchField(),
+
+        CardFavoritos(colecaoFavoritos: widget.listaDeColecoes.firstWhere((element) => element.collectionId == "Favoritos")),
         Padding(
             padding: const EdgeInsets.only(top: 30.0),
             child: Row(
@@ -58,7 +93,7 @@ class ListAllCollections extends StatelessWidget{
           padding: const EdgeInsets.only(top: 8, left: 15, right: 15, bottom: 10),
           child: Row(children: [
             const SizedBox(width: 60),
-            Expanded(child: Text("Total de coleções: ${listaDeColecoes.length - 1}", textAlign: TextAlign.center,)),
+            Expanded(child: Text("Total de coleções: ${widget.listaDeColecoes.length - 1}", textAlign: TextAlign.center,)),
             SizedBox(
               width: 60,
               height: 28,
@@ -82,21 +117,20 @@ class ListAllCollections extends StatelessWidget{
 
         Expanded(
           child: ListView.builder(
-          cacheExtent: double.infinity,
-          itemCount: listaDeColecoes.length, 
-          itemBuilder: (BuildContext context, int index) { 
-            final item = listaDeColecoes[index];
-            if(item.collectionId != "Favoritos") {
-              return CardCollections(itemColecao: item);
-            }
-            else{
-              return const SizedBox();
-            }
+            cacheExtent: double.infinity,
+            itemCount: widget.listaDeColecoes.length, 
+            itemBuilder: (BuildContext context, int index) { 
+              final item = widget.listaDeColecoes[index];
+              if(item.collectionName.toUpperCase().contains(searchController.text.toUpperCase()) && item.collectionId != "Favoritos") {
+                return CardCollections(itemColecao: item);
+              }
+              else{
+                return const SizedBox();
+              }
             },
           ),
         ),
       ],
     );
   }
-  
 }

@@ -10,8 +10,8 @@ class AddComment extends StatefulWidget{
 }
 
 class _AddCommentState extends State<AddComment> {
-  final commentControler = TextEditingController();
-  commentValue() => commentControler.text;
+  final commentController = TextEditingController();
+  commentValue() => commentController.text;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class _AddCommentState extends State<AddComment> {
           ),
           child: TextField(
             textCapitalization: TextCapitalization.sentences,
-            controller: commentControler,
+            controller: commentController,
             maxLength: 1000,
             maxLines: null,
             minLines: null,
