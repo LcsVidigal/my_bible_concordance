@@ -155,7 +155,13 @@ class _AddVerseBodyState extends State<AddVerseBody> {
                 onChanged: (int? newValue) {
                   setState(() {
                     selectedInitialVerse = newValue!;
-                    selectedFinalVerse = newValue;
+                    if(selectedFinalVerse == null) {
+                      selectedFinalVerse = newValue;
+                    } 
+                    else if(selectedFinalVerse! < selectedInitialVerse!){
+                      selectedFinalVerse = newValue;
+                    }
+                  
                   });
                 },
                 items: 
