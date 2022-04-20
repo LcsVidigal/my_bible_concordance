@@ -16,12 +16,16 @@ Dessa forma, você vai criando um repositório de versículos sobre determinados
 ## Tecnologias e conceitos aplicados
 
 - Flutter (óbvio)
-- SQLite
+- SQLite - 
     Utilizado para persistir os dados offline. 
-- Utilização de banco de dados externo
+- Utilização de banco de dados externo - 
     Precisei adaptar um banco de dados externo com o conteúdo da bíblia, para não precisar fazer requisições online toda hora e facilitar o uso
-- Gerenciamento de estado com "Provider" e "setState"
+- Gerenciamento de estado com "Provider" e "setState" - 
     Gerencia de estado é um grande desafio, optei por utilizar o Provider para ouvir as alterações do banco e setState para coisas mais simples.
+- Figma para criar o protótipo das telas
     
+## Oberservações
 
-
+- Link do projeto no Figma: https://www.figma.com/file/5hhInB2URLJECgBvwWFNC7/My-Bible-DB?node-id=221%3A1890
+- É claro que esse projeto ainda está em desenvolvimento, há muita para ser feito, então estarei atualizando esse repositório continuamente
+- Na pasta "Download do aplicativo" coloquei o arquivo executável para instalar o aplicativo (apenas no SO Android) em sua versão utilizável mais recente.
