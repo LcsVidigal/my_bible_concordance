@@ -28,4 +28,4 @@ Dessa forma, você vai criando um repositório de versículos sobre determinados
 
 - Link do projeto no Figma: https://www.figma.com/file/5hhInB2URLJECgBvwWFNC7/My-Bible-DB?node-id=221%3A1890
 - É claro que esse projeto ainda está em desenvolvimento, há muita para ser feito, então estarei atualizando esse repositório continuamente
-- Na pasta "Download do aplicativo" coloquei o arquivo executável para instalar o aplicativo (apenas no SO Android) em sua versão utilizável mais recente.
+- Há uma versão utilizável da aplicação na aba 'Releases' do repositório.
