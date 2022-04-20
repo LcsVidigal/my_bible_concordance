@@ -44,5 +44,19 @@ class DbRepository extends ChangeNotifier{
     notifyListeners();
   }
 
+  favoriteVerse(VersesModel verse, int isFavorite) async {
+    VersesModel aux = 
+    VersesModel(verse.verseId, "Versos Favoritos", "Favoritos", verse.book, verse.chapter, verse.initialVerse, verse.finalVerse, verse.text, isFavorite, verse.comment);
+
+    await DBProvider.db.favoriteVerse(verse, isFavorite);
+
+    if(isFavorite == 1) {
+      await DBProvider.db.insertVerse(aux);
+    } else {
+      await DBProvider.db.deleteFromFavorites(aux);
+    }
+    notifyListeners();
+  }
+
 
 }

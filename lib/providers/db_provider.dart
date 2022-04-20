@@ -80,13 +80,6 @@ class DBProvider {
   }
 
 
-  // Future<int> deleteAllCollections() async {
-  //   final db = await database;
-  //   final res = await db.rawDelete('DELETE FROM Collections');
-
-  //   return res;
-  // }
-
   Future<List<CollectionsModel>> getAllCollections() async {
     final db = await database;
     final res = await db.rawQuery("SELECT * FROM Collections ORDER BY collectionName ASC");
@@ -137,9 +130,18 @@ class DBProvider {
   deleteFromVerses(VersesModel verse) async {
     final db = await database;
     final count = await db.rawUpdate('UPDATE Collections SET numberOfVerses = numberOfVerses - 1 WHERE collectionId = ?',[verse.idCollection]);
-    final res = await db.rawDelete('DELETE FROM Verses WHERE verseId = ?', [verse.verseId]);
+    final update = await db.rawUpdate("UPDATE Verses SET isFavorite = 0 WHERE verseId = ? AND idCollection != 'Favoritos'",[verse.verseId]);
+    final res = await db.rawDelete('DELETE FROM Verses WHERE verseId = ? AND idCollection = ?', [verse.verseId, verse.idCollection]);
 
     return count;
+  }
+
+  deleteFromFavorites(VersesModel verse) async {
+    final db = await database;
+    final count = await db.rawUpdate("UPDATE Collections SET numberOfVerses = numberOfVerses - 1 WHERE collectionId = 'Favoritos'");
+    final res = await db.rawDelete("DELETE FROM Verses WHERE verseId = ? AND idCollection = 'Favoritos'", [verse.verseId]);
+
+    return res;
   }
 
   updateVerse(VersesModel verse) async {
@@ -148,6 +150,14 @@ class DBProvider {
 
     return res;
   }
+
+  favoriteVerse(VersesModel verse, int isFavorite) async {
+    final db = await database;
+    final res = await db.rawUpdate('UPDATE Verses SET isFavorite = ? WHERE verseId = ?',[isFavorite, verse.verseId]);
+
+    return res;
+  }
+
   
 
 }

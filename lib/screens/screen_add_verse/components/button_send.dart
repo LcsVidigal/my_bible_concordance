@@ -59,10 +59,13 @@ class _ButtonSendState extends State<ButtonSend> {
                 selectedInitialVerse().toString(),
                 selectedFinalVerse().toString(),
                 verseText(),
-                1,
+                0,
                 commentValue()
               );
               
+              if(verso.idCollection == "Favoritos"){
+                verso.isFavorite = 1;
+              }
               Provider.of<DbRepository>(context, listen: false).addVerse(verso);
 
               Navigator.pop(context, 'Ok');

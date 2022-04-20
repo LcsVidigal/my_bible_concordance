@@ -45,7 +45,7 @@ class CardVerses extends StatelessWidget {
               ),
               Expanded(child: Container()),
 
-              if(verso.isFavorite == 0)
+              if(verso.isFavorite == 1)
                 const Icon(Icons.favorite, color: Colors.red),
 
               SizedBox(

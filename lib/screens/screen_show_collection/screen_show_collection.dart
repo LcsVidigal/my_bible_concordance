@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_bible_concordance/providers/collections_repository.dart';
@@ -16,7 +14,7 @@ class ScreenShowCollection extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(currentCollection.collectionName, style: TextStyle(color: Colors.black, fontFamily: 'Inter', fontSize: 28, fontWeight: FontWeight.w800)),
+        title: Text(currentCollection.collectionName, style: const TextStyle(color: Colors.black, fontFamily: 'Inter', fontSize: 28, fontWeight: FontWeight.w800)),
         backgroundColor: kBackgroundColor,
         systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: kBackgroundColor, statusBarIconBrightness: Brightness.dark),
         elevation: 0,
@@ -65,9 +63,6 @@ class ScreenShowCollectionBody extends StatelessWidget{
   
 }
 
-
-
-
 class ListVerses extends StatelessWidget{
   final listVerses;
   final collection;
@@ -80,11 +75,11 @@ class ListVerses extends StatelessWidget{
         children: [
           // SearchField(),
           ButtonAddVerse(currentCollection: collection),
-          SizedBox(height: 12),
-          Text("Total de Versos: ${listVerses.length}", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
+          Text("Total de Versos: ${listVerses.length}", style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),),
+          const SizedBox(height: 12),
           if(listVerses.length  == 0)
-            Text("Você ainda não possui itens nessa coleção."),
+            const Text("Você ainda não possui itens nessa coleção."),
 
           Expanded(
             child: ListView.builder(

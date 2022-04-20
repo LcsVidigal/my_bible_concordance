@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_bible_concordance/providers/collections_repository.dart';
 import 'package:my_bible_concordance/utils/constants.dart';
+import 'package:provider/provider.dart';
 
-class ScreenViewVerse extends StatelessWidget{
+class ScreenViewVerse extends StatefulWidget{
   final currentVerse;
   const ScreenViewVerse({Key? key, required this.currentVerse}) : super(key: key);
 
   @override
+  State<ScreenViewVerse> createState() => _ScreenViewVerseState();
+}
+
+class _ScreenViewVerseState extends State<ScreenViewVerse> {
+  late int aux;
+  void initState(){
+    super.initState();
+    aux = widget.currentVerse.isFavorite;
+  }
+  
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(currentVerse.collection, style: const TextStyle(color: Colors.black, fontFamily: 'Inter', fontSize: 26, fontWeight: FontWeight.w800)),
+        title: Text(widget.currentVerse.collection, style: const TextStyle(color: Colors.black, fontFamily: 'Inter', fontSize: 26, fontWeight: FontWeight.w800)),
         backgroundColor: kBackgroundColor,
         systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: kBackgroundColor, statusBarIconBrightness: Brightness.dark),
         elevation: 0,
@@ -24,10 +37,24 @@ class ScreenViewVerse extends StatelessWidget{
               child: const Text("Voltar", style: TextStyle(color: Colors.green, fontSize: 17, fontWeight: FontWeight.w500))),
             ),
         
-        actions: <Widget> [Container(child: const Icon(Icons.settings, color: Color.fromARGB(221, 145, 143, 143),), margin: EdgeInsets.only(right: 10),)],
+        actions: <Widget> [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                aux = 1 - aux;
+                Provider.of<DbRepository>(context, listen: false).favoriteVerse(widget.currentVerse, aux);
+              });
+            }, 
+            icon: 
+              aux == 1 ?
+                const Icon(Icons.favorite, color: Colors.red)
+              : const Icon(Icons.favorite_outline, color: Colors.black)
+
+          )
+        ]
       ),
 
-      body: BodyViewVerse(currentVerse: currentVerse),
+      body: BodyViewVerse(currentVerse: widget.currentVerse),
     );
 
   }
